@@ -10,7 +10,21 @@ import android.widget.EditText;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Scanner;
+
 public class SearchDialog extends AppCompatDialogFragment {
+    private static String FILE_NAME = "history.txt";
+
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -26,7 +40,9 @@ public class SearchDialog extends AppCompatDialogFragment {
                     public void onClick(DialogInterface dialog, int id) {
                         MainActivity mainActivity = new MainActivity();
 
+
                         String productNameAsString = productName.getText().toString();
+
                         String[] products = mainActivity.productsTitle;
                         boolean exist = false;
                         for (String product : products) {

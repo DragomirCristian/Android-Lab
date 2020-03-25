@@ -7,6 +7,13 @@
     <item
         android:onClick="search"
         android:title="Search" />
+    <item
+        android:id="@+id/lastSearch"
+        android:onClick="loadLastSearch"
+        android:title="Last Search" />
+    <item
+        android:onClick="settings"
+        android:title="Settings" />
     <item android:id="@+id/About"
         android:title="About" />
     <item android:id="@+id/help"

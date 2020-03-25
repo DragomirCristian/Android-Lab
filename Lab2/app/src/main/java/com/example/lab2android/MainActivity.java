@@ -1,32 +1,31 @@
 package com.example.lab2android;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.DialogFragment;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import android.annotation.SuppressLint;
-import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import static android.provider.AlarmClock.EXTRA_MESSAGE;
-
 public class MainActivity extends AppCompatActivity {
+    private static String PREFS_NAME = "PREFS";
+
+
     String description = "";
     public static final String EXTRA_MESSAGE = "com.example.lab2android.MESSAGE";
     public String[] productsTitle = new String[]{
@@ -39,6 +38,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        boolean darkmode = load_preferences();
+        if (darkmode) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+            System.out.println("hahahah\n\n\n\n");
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
+
 
         final ListView productsList = (ListView) findViewById(R.id.productsList);
         final TextView price = (TextView) findViewById(R.id.price);
@@ -72,6 +80,8 @@ public class MainActivity extends AppCompatActivity {
                 price.setText("The price is " + priceTag);
             }
         });
+
+
     }
 
     @Override
@@ -146,4 +156,29 @@ public class MainActivity extends AppCompatActivity {
         searchDialog.show(getSupportFragmentManager(), "search dialog");
         return true;
     }
+
+    // LAB4 shared preferences
+    public boolean settings(MenuItem menuItem) {
+        Intent intent = new Intent();
+        intent.setClassName(this, "com.example.lab2android.SettingsActivity");
+        startActivity(intent);
+        return true;
+    }
+
+    public boolean load_preferences() {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        boolean darkmode = sharedPreferences.getBoolean("darkmode", false);
+        String username = sharedPreferences.getString("username", "noone");
+
+        Toast.makeText(this, "Username: " + username + "\nDarkMode: " + darkmode, Toast.LENGTH_SHORT).show();
+        return darkmode;
+    }
+
+    public boolean loadLastSearch(MenuItem menuItem) {
+        Intent intent = new Intent(this, RememberActivity.class);
+        startActivity(intent);
+        return true;
+    }
+
+
 }
