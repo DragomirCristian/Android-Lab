@@ -165,6 +165,12 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    public boolean sensors(MenuItem menuItem) {
+        Intent intent = new Intent(this, SensorsActivity.class);
+        startActivity(intent);
+        return true;
+    }
+
     public boolean load_preferences() {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         boolean darkmode = sharedPreferences.getBoolean("darkmode", false);

@@ -12,6 +12,9 @@
         android:onClick="loadLastSearch"
         android:title="Last Search" />
     <item
+        android:onClick="sensors"
+        android:title="Sensors" />
+    <item
         android:onClick="settings"
         android:title="Settings" />
     <item android:id="@+id/About"
