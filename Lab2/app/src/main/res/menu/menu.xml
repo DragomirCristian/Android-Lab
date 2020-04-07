@@ -15,6 +15,9 @@
         android:onClick="sensors"
         android:title="Sensors" />
     <item
+        android:onClick="camera"
+        android:title="Camera" />
+    <item
         android:onClick="settings"
         android:title="Settings" />
     <item android:id="@+id/About"
